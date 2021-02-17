@@ -1,4 +1,4 @@
-grammar helloBis;
+grammar helloGrammar;
 
 root: HELLO ID;
 

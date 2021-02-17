@@ -1,0 +1,18 @@
+token literal names:
+null
+'hello'
+null
+null
+
+token symbolic names:
+null
+HELLO
+ID
+WS
+
+rule names:
+root
+
+
+atn:
+[3, 51485, 51898, 1421, 44986, 20307, 1543, 60043, 49729, 3, 5, 8, 4, 2, 9, 2, 3, 2, 3, 2, 3, 2, 3, 2, 2, 2, 2, 3, 2, 2, 2, 2, 2, 6, 2, 4, 3, 2, 2, 2, 4, 5, 7, 3, 2, 2, 5, 6, 7, 4, 2, 2, 6, 3, 3, 2, 2, 2, 2]

@@ -27,13 +27,14 @@ class Generator extends React.Component {
     onChangeHandler = (e) => this.setState({ selectedFile: e.target.files[0] })
 
     render() {
-        return (<div className="container">
-            <h3>Upload your grammar file</h3>
-            <div className="upload-zone">
-                <input type="file" name="file" onChange={this.onChangeHandler} />
-                <button onClick={this.uploadGrammar.bind(this)}>Upload</button>
-            </div>
-        </div>);
+        return (
+            <div className="container">
+                <h3>Upload your grammar file</h3>
+                <div className="upload-zone">
+                    <input type="file" name="file" onChange={this.onChangeHandler} />
+                    <button onClick={this.uploadGrammar.bind(this)}>Upload</button>
+                </div>
+            </div>);
     }
 }
 export default Generator;
