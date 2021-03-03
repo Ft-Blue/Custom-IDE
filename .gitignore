@@ -4,4 +4,5 @@ node_modules
 
 # Output
 dist
-API/grammar
+backend/grammar
+build/

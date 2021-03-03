@@ -6,17 +6,40 @@ import fs from "fs";
 import path from "path";
 import { spawn } from "child_process";
 import Handlebars from "handlebars";
+import session from "express-session";
+import redis from "redis";
+import connectRedis from "connect-redis";
+let RedisStore = connectRedis(session);
+let redisClient = redis.createClient();
 
 const app = express();
 app.use(cors());
+app.use(
+  session({
+    secret: ['veryimportantsecret', 'notsoimportantsecret', 'highlyprobablysecret'],
+    saveUninitialized: true,
+    name: "secretname",
+    cookie: {
+      httpOnly: true,
+      secure: true,
+      sameSite: true,
+      maxAge: 3600000
+    },
+    store: new RedisStore({ client: redisClient, ttl: 86400 }),
+    resave: false
+  })
+)
 app.use(bodyParser.json());
-
 const PORT = 5000;
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
+
+    const sessionID = req['sessionID'];
+    console.log(sessionID);
+
     const grammarName = file.originalname.split(".")[0];
-    const _path = path.join("grammar", grammarName);
+    const _path = path.join("grammar", sessionID, grammarName);
     fs.mkdirSync(_path, { recursive: true });
     cb(null, _path);
   },
@@ -52,7 +75,8 @@ const runAntlr = (filename: string, path_to_grammar, grammarRoot) => {
   });
 };
 
-app.post("/generate", (req, res) => {
+
+app.post("/generate", (req, res, next) => {
   upload(req, res, (err) => {
     if (err) {
       return res.status(500).json(err);

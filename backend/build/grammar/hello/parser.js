@@ -8,6 +8,6 @@ function parseAndGetASTRoot(code) {
     const lexer = new helloLexer_1.helloLexer(inputStream);
     const tokenStream = new antlr4ts_1.CommonTokenStream(lexer);
     const parser = new helloParser_1.helloParser(tokenStream);
-    return parser.todoExpressions();
+    return parser.root();
 }
 exports.default = parseAndGetASTRoot;
